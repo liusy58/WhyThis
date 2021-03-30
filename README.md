@@ -1,24 +1,38 @@
 # WhyThis
 This repo will contain all my questions about system designing and my opinions about them. I'll try to update it everyday. :-)
 
-## C++
-* 为什么有了`NULL`，`C++11`又引入了`nullptr`?
+C++
+===
 
+为什么有了`NULL`，`C++11`又引入了`nullptr`?
 ----
-专门用来区分0和空指针。
+专门用来区分0和空指针。所以很明显的，空指针与0绝对是不能够画上等号的。
 
+
+
+为什么`C++`要引入`constexpr`
 ----
 
-* 为什么`C++`要引入`constexpr`
-
-----
 为了解决C++标准中数组的长度必须是一个常量表达式的问题。
 
-----
 
 
-## OS
-### 条件变量为什么需要加锁和循环
+为什么`C++11`引入了`auto`关键字？
+-----
+
+使用`auto`进行类型推导，其中用在迭代器中是最常见的。
+
+
+
+
+
+
+OS
+=====
+
+条件变量为什么需要加锁和循环
+--------
+
 
 - 加锁是为了保护共享变量读写互斥，比如 `count` , `flag` 
 - `wait` 设计成要传入锁是为了防止lost wakeup问题
@@ -142,3 +156,25 @@ while (!ready) wait(lk);
 
 
 
+
+
+
+
+
+Appendix
+=====
+`C++11`新特性
+-----
+
+* 列表初始化
+* 
+
+
+
+
+`C++17`新特性
+-----
+
+* 结构化绑定
+* `if/switch`变量声明强化
+* 
