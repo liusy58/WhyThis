@@ -146,6 +146,115 @@ std::cout << "Worker thread is processing data\n";
 while (!ready) wait(lk);
 ```
 
+### 如何实现锁
+
+#### 自旋锁
+
+自旋锁的实现有三个关键点
+
+- 中断
+- test_and_set/compare_and_swap
+- memory_barrier
+
+
+
+- 首先来看中断，一般自旋锁的实现在 `aquire` 中会关中断，在 `release` 中会重新打开中断，这是因为线程成功获取一把锁后，中断后的代码依然有可能需要获取同一把锁，这样就会死锁。
+- test_and_set/compare_and_swap原子操作，如果这个过程不是原子操作的话可能会导致临界区被多个线程/进程进入
+- memory_barrier，在 `aquire` 中是为了保证临界区的代码始终要在获取锁之后才执行；在 `release` 中是为了保证临界区的代码在释放锁之前已经执行完毕。
+
+xv6中的实现
+
+```cpp
+// Acquire the lock.
+// Loops (spins) until the lock is acquired.
+void
+acquire(struct spinlock *lk)
+{
+  push_off(); // disable interrupts to avoid deadlock.
+  if(holding(lk))
+    panic("acquire");
+
+  // On RISC-V, sync_lock_test_and_set turns into an atomic swap:
+  //   a5 = 1
+  //   s1 = &lk->locked
+  //   amoswap.w.aq a5, a5, (s1)
+  while(__sync_lock_test_and_set(&lk->locked, 1) != 0)
+    ;
+
+  // Tell the C compiler and the processor to not move loads or stores
+  // past this point, to ensure that the critical section's memory
+  // references happen strictly after the lock is acquired.
+  // On RISC-V, this emits a fence instruction.
+  __sync_synchronize();
+
+  // Record info about lock acquisition for holding() and debugging.
+  lk->cpu = mycpu();
+}
+
+
+// Release the lock.
+void
+release(struct spinlock *lk)
+{
+  if(!holding(lk))
+    panic("release");
+
+  lk->cpu = 0;
+
+  // Tell the C compiler and the CPU to not move loads or stores
+  // past this point, to ensure that all the stores in the critical
+  // section are visible to other CPUs before the lock is released,
+  // and that loads in the critical section occur strictly before
+  // the lock is released.
+  // On RISC-V, this emits a fence instruction.
+  __sync_synchronize();
+
+  // Release the lock, equivalent to lk->locked = 0.
+  // This code doesn't use a C assignment, since the C standard
+  // implies that an assignment might be implemented with
+  // multiple store instructions.
+  // On RISC-V, sync_lock_release turns into an atomic swap:
+  //   s1 = &lk->locked
+  //   amoswap.w zero, zero, (s1)
+  __sync_lock_release(&lk->locked);
+
+  pop_off();
+}
+```
+
+
+#### 睡眠锁
+
+xv6中的实现
+
+```cpp
+void
+acquiresleep(struct sleeplock *lk)
+{
+  acquire(&lk->lk);
+  while (lk->locked) {
+    sleep(lk, &lk->lk);
+  }
+  lk->locked = 1;
+  lk->pid = myproc()->pid;
+  release(&lk->lk);
+}
+
+void
+releasesleep(struct sleeplock *lk)
+{
+  acquire(&lk->lk);
+  lk->locked = 0;
+  lk->pid = 0;
+  wakeup(lk);
+  release(&lk->lk);
+}
+```
+
+睡眠锁内部还有一把自旋锁，来保护自己的数据结构。
+这里的代码非常像条件变量，加锁和while循环的原因都与条件变量相同，可以认为这里的条件是**锁是否可以获取**
+`sleep` 中把让本进程睡眠，并把 `PCB` 中的 `chan` 指定为 `lk` 
+`wakeup` 中遍历所有进程，找出 `PCB` 中 `chan` 为 `lk` 的进程，并把状态改为就绪态
 ## Networking
 
 
