@@ -146,6 +146,7 @@ std::cout << "Worker thread is processing data\n";
 while (!ready) wait(lk);
 ```
 
+
 ### 如何实现锁
 
 #### 自旋锁
@@ -257,7 +258,7 @@ releasesleep(struct sleeplock *lk)
 `wakeup` 中遍历所有进程，找出 `PCB` 中 `chan` 为 `lk` 的进程，并把状态改为就绪态   
 
 
-为什么需要锁？
+为什么操作系统需要锁？
 -----
 
 因为应用程序想要使用多个CPU核，但是操作系统又有很多的全局变量，所以如果多个应用程序并行进行系统调用，为了保证正确性，我们是不能够让这些公用的数据结构并行进行修改的。
