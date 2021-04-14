@@ -332,7 +332,7 @@ Appendix
 
 ### Compiler
 1. 为什么用户程序中未初始化的全局/静态变量要使用COMMON块？
-2. 
+   
 
 ### OperatingSystem
 
