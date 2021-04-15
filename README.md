@@ -332,6 +332,7 @@ Appendix
 
 ### Compiler
 1. [为什么目标文件中未初始化的全局/静态变量要使用COMMON块？](./Compiler/q1.md)
+2. [为什么静态运行库里面一个目标文件只包含一个函数？](./Compiler/q2.md)
    
 
 ### OperatingSystem
