@@ -337,6 +337,7 @@ Appendix
 
 ### OperatingSystem
 1. [为什么进程退出的时候没有内存泄漏？](./OperatingSystem/q1.md)
+2. [分段真的是很糟粕的东西吗？]()
 
 ### Database
 
