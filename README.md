@@ -336,7 +336,7 @@ Appendix
    
 
 ### OperatingSystem
-1. [为什么进程退出的时候即使堆上面有一些内存没有被释放还是不会发生内存泄漏？]()
+1. [为什么进程退出的时候没有内存泄漏？](./OperatingSystem/q1.md)
 
 ### Database
 
