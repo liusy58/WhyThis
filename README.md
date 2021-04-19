@@ -338,13 +338,14 @@ Anyone who wants to join us, contact me and look forward for your contribution.
 ### Compiler
 1. [为什么目标文件中未初始化的全局/静态变量要使用COMMON块？](./Compiler/q1.md)
 2. [为什么静态运行库里面一个目标文件只包含一个函数？](./Compiler/q2.md)
-3. [为什么main不是一个程序最开始执行的代码？]()
+   
    
 
 ### OperatingSystem
 1. [为什么进程退出的时候没有内存泄漏？](./OperatingSystem/q1.md)
 2. [分段真的是很糟粕的东西吗？]()
 3. [为什么需要有memory allocator?]()
+4. [为什么main“不是”程序的入口？]()
 
 ### Database
 
