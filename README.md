@@ -347,6 +347,7 @@ Anyone who wants to join us, contact me and look forward for your contribution.
 3. [为什么需要有memory allocator?]()
 4. [为什么main“不是”程序的入口？](./OperatingSystem/q4.md)
 5. [为什么需要多级页表，单级页表为何不妥？]()
+6. [为什么有伙伴系统分配器还需要SLAB分配器？]
 
 ### Database
 
