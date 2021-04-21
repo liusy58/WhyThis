@@ -357,7 +357,7 @@ Anyone who wants to join us, contact me and look forward for your contribution.
 
 
 ### Architecture
-1. [为什么C++里面的浮点数比较要用1e-6作基准？]()
+1. [为什么C++里面的浮点数比较要用1e-6作基准？](./Architecture/q1.md)
 
 
 
