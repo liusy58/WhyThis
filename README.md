@@ -350,7 +350,7 @@ Anyone who wants to join us, contact me and look forward for your contribution.
 6. [为什么有伙伴系统分配器还需要SLAB分配器？](./OperatingSystem/q6.md)
 7. [为什么说mmap能共享内存？]()
 8. [为什么不用fork来创建线程？]()
-9. [为什么说Linux没有线程的概念？](./)
+9. [为什么说Linux没有线程的概念？](./OperatingSystem/q9.md)
 
 ### Database
 
