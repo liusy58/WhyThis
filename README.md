@@ -47,8 +47,10 @@ Anyone who wants to join us, contact me and look forward for your contribution.
 
 
 
+### Data Structure
 
-
+1. [为什么并查集需要有路径压缩？]()
+2. 
 
 
 
