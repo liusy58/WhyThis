@@ -15,7 +15,9 @@ Anyone who wants to join us, contact me and look forward for your contribution.
 ### Compiler
 1. [为什么目标文件中未初始化的全局/静态变量要使用COMMON块？](./Compiler/q1.md)
 2. [为什么静态运行库里面一个目标文件只包含一个函数？](./Compiler/q2.md)
-3. [为什么汇编器需要两次扫描？]()   
+3. [为什么需要汇编器？]()   
+4. [为什么汇编器一般是两次扫描？]()
+5. [为什么并发程序需要额外考虑优化等级？]()
    
 
 ### OperatingSystem
@@ -42,7 +44,8 @@ Anyone who wants to join us, contact me and look forward for your contribution.
 
 ### Architecture
 1. [为什么C++里面的浮点数比较要用1e-6作基准？](./Architecture/q1.md)
-2. 
+2. [Why Way prediction can optimize Cache Performance?]()
+3. 
 
 
 
